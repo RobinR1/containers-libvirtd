@@ -1,0 +1,11 @@
+[Unit]
+Description=Initialize container
+Before=libvirtd.service sshd.service
+
+[Service]
+Type=oneshot
+PassEnvironment=ROOT_PASSWORD SSHD_PORT DEBUG_MODE
+ExecStart=/bin/sh /usr/bin/container_init.sh
+
+[Install]
+WantedBy=multi-user.target
