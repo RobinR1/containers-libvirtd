@@ -26,6 +26,20 @@ has SSH running on port 22.
 Tip: add `-v /root/.ssh:/root/.ssh` to share the root SSH keys from the host system with this
 system.
 
+## Auto starting container
+Using podman, you can generate a systemd service-file to autostart the container on boot:
+```bash
+podman generate systemd -t 300 --name libvirtd > /etc/systemd/system/container-some-libvirtd.service
+systemctl daemon-reload
+systemctl enable container-some-libvirtd.service
+```
+To allow the running virtual machines to suspend correctly when stopping the container, we need to set the
+podman stop timeout to 5min using the `-t 300` option but as systemd itself also has a default timeout
+of 1m30s we have to adjust this manually in the service file by adding the following:
+```ini
+TimeoutStopSec=360
+```
+
 ## Container shell access
 Since the container is running an SSH Daemon you can connect to it using SSH to the `SSHD_PORT`
 on the host system.
