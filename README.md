@@ -1,6 +1,10 @@
 # Libvirt container
 This container runs a libvirtd instance in an openSUSE Tumbleweed environment.
 
+It will autostart virtual machines that are set to autostart inside libvirt. It will
+also suspend virtual machines still running when the container is stopped and
+re-activate those virtual machines again when the container is started again.
+
 It is intended to be run with `host` networking and has an SSH daemon active to remotely connect
 for example virt-manager to it. 
 For a correct functioning of the virtualization, this container needs to be run in `privileged` mode
