@@ -29,14 +29,18 @@ system.
 ## Auto starting container
 Using podman, you can generate a systemd service-file to autostart the container on boot:
 ```bash
-podman generate systemd -t 300 --name libvirtd > /etc/systemd/system/container-some-libvirtd.service
+podman generate systemd -t 300 --name some-libvirtd > /etc/systemd/system/container-some-libvirtd.service
 systemctl daemon-reload
 systemctl enable container-some-libvirtd.service
 ```
 To allow the running virtual machines to suspend correctly when stopping the container, we need to set the
 podman stop timeout to 5min using the `-t 300` option but as systemd itself also has a default timeout
-of 1m30s we have to adjust this manually in the service file by adding the following:
+of 1m30s we have to override this manually:
+```bash
+systemctl edit container-some-libvirtd
+```
 ```ini
+[Service]
 TimeoutStopSec=360
 ```
 
