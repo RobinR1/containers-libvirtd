@@ -8,7 +8,7 @@ MAINTAINER Robin Roevens <robin.roevens@disroot.org>
 RUN zypper ref && \
     # Work around https://github.com/openSUSE/obs-build/issues/487 \
     zypper install -y openSUSE-release-appliance-docker && \
-    zypper -n in qemu-kvm libvirt-daemon-qemu libvirt-client insserv-compat && \
+    zypper -n in qemu-tools qemu-kvm libvirt-daemon-qemu libvirt-client insserv-compat && \
     zypper clean -a ; \
     (cd /usr/lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /usr/lib/systemd/system/multi-user.target.wants/*;\
