@@ -1,3 +1,7 @@
+#!BuildTag: libvirtd
+#
+# podman pull registry.opensuse.org/home/RobinR1/containers/containers/libvirtd:latest
+#
 FROM opensuse/tumbleweed
 MAINTAINER Robin Roevens <robin.roevens@disroot.org>
 
